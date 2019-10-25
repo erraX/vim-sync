@@ -100,7 +100,11 @@ function! s:SyncCreateVimUploadCommand()
         endif
     else
         if s:SyncUseAsyncRun()
-            let l:command = 'AsyncRun ' . l:file_command
+            if g:sync_async_silent
+              let l:command = 'AsyncRun -raw ' . l:file_command
+            else
+              let l:command = 'AsyncRun' . l:file_command
+            endif
         else
             let l:command = '!' . l:file_command
         endif
